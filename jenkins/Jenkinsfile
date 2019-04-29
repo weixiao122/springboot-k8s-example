@@ -65,15 +65,15 @@ podTemplate(label: label, cloud: 'kubernetes', containers: [
             }
 
             stage('docker-build') {
-                sh "docker build . -t ${params.REGISTRY_URL}/lusyoe/k8s-example:${shortGitCommit}"
+                sh "docker build . -t ${params.REGISTRY_URL}/zhangsan1234/k8s-example:${shortGitCommit}"
             }
 
             stage('docker-push') {
-                sh "docker push ${params.REGISTRY_URL}/lusyoe/k8s-example:${shortGitCommit}"
+                sh "docker push ${params.REGISTRY_URL}/zhangsan1234/k8s-example:${shortGitCommit}"
             }
 
             stage('docker-remove') {
-                sh "docker rmi ${params.REGISTRY_URL}/lusyoe/k8s-example:${shortGitCommit}"
+                sh "docker rmi ${params.REGISTRY_URL}/zhangsan1234/k8s-example:${shortGitCommit}"
             }
 
         }
@@ -81,7 +81,7 @@ podTemplate(label: label, cloud: 'kubernetes', containers: [
 
         container('kubectl') {
             stage('k8s deploy') {
-                sh "sed -i \"s/lusyoe\\/k8s-example/${params.REGISTRY_URL}\\/lusyoe\\/k8s-example:${shortGitCommit}/g\" k8s-example.yaml"
+                sh "sed -i \"s/lusyoe\\/k8s-example/${params.REGISTRY_URL}\\/zhangsan1234\\/k8s-example:${shortGitCommit}/g\" k8s-example.yaml"
                 sh "kubectl --kubeconfig=/root/.kube/config apply -f k8s-example.yaml"
             }
         }
